@@ -1,0 +1,19 @@
+.movies{
+    flex: 1;
+
+    &__container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        perspective: 10000px;
+    }
+
+    &__heading{
+        color: #fff;
+        font-size: 2rem;
+        letter-spacing: 2px;
+        
+    }
+}

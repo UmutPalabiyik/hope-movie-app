@@ -4,8 +4,8 @@ import request from "../../requests";
 
 
 
-export const fetchMovies = createAsyncThunk("movies/fetch", async () => {
-    const response = await axios.get(`${request.fetchTrending}`);
+export const fetchMovies = createAsyncThunk("movies/fetch", async (param) => {
+    const response = await axios.get(`${request.fetchNowPlaying}`);
     return response.data.results
 
 })
@@ -20,6 +20,11 @@ const initialState = {
 const moviesSlice = createSlice({
     name: "movies",
     initialState,
+    reducers: {
+        filteredMovie: (state, action) => {
+            state.movies = state.movies.filter(movie => movie.original_title.includes(action.payload))
+        }
+    },
     extraReducers: {
         [fetchMovies.pending] : (state, action) => {
             state.status = "loading"
@@ -39,5 +44,5 @@ const moviesSlice = createSlice({
 
 
 
-
+export const { filteredMovie } = moviesSlice.actions;
 export default moviesSlice.reducer;

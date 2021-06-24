@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
 .nav {
-    
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   &__list {
     display: flex;
     flex-direction: column;
-    display: inline-block;
-
-    position: absolute;
-    top: 40%;
-    left: 0;
   }
 
   &__item {
     margin-bottom: 1.2rem;
     border-radius: 0 .5rem .5rem 0;
-    background-color: rgba(255, 0, 0, .5);
+    background-color: #7f5a83;
+background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+
     padding: .8rem 2.5rem;
     text-align: center;
     cursor: pointer;
