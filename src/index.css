@@ -9,6 +9,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+*{
+  box-sizing: border-box;
+}
 
 
 *{
