@@ -13,6 +13,7 @@ export const fetchMovies = createAsyncThunk("movies/fetch", async (param) => {
 
 const initialState = {
     movies: [],
+    inputValue : "",
     status: "idle",
     error: null
 }
@@ -21,8 +22,8 @@ const moviesSlice = createSlice({
     name: "movies",
     initialState,
     reducers: {
-        filteredMovie: (state, action) => {
-            state.movies = state.movies.filter(movie => movie.original_title.includes(action.payload))
+        handleInputValue: (state, action) => {
+            state.inputValue = action.payload.toLowerCase()
         }
     },
     extraReducers: {
@@ -44,5 +45,5 @@ const moviesSlice = createSlice({
 
 
 
-export const { filteredMovie } = moviesSlice.actions;
+export const { handleInputValue } = moviesSlice.actions;
 export default moviesSlice.reducer;

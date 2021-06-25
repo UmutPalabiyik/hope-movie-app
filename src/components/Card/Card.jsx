@@ -6,18 +6,20 @@ const Card = ({ movie }) => {
 
     const {original_title, overview, vote_average, poster_path} = movie;
 
+ 
+
     return(
         <div className="card"> 
             <div className="card__front">
                 <img className="card__poster" src={`${baseImgUrl}${poster_path}`} alt="" />
-                <div className="card__title">{original_title}</div>
+                <p className="card__vote">{`${Number.isInteger(vote_average) ?  vote_average+".0" : vote_average   }`}</p>
+                <div className="card__title">{original_title.substring(0, 20)}</div>
             </div>
 
 
             <div className="card__back">
                 <div className="card__title">{original_title}</div>
                 <div className="card__overview">{overview}</div>
-                <p className="card__vote">{vote_average}</p>
             </div>
         </div>
     )

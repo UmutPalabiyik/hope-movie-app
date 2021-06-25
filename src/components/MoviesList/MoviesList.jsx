@@ -6,9 +6,20 @@ import "./MoviesList.scss";
 
 const MoviesList = () => {
   const dispatch = useDispatch();
+
+
+  /* Handle movies */
   const moviesStatus = useSelector((state) => state.movies.status);
   const moviesState = useSelector((state) => state.movies.movies);
   const moviesError = useSelector((state) => state.movies.error);
+
+  /* Handle header input  */
+  const inputValue = useSelector((state) => state.movies.inputValue);
+  
+
+  const filteredMovie = moviesState.filter(movie => movie.original_title.toLowerCase().includes(inputValue));
+
+
 
   useEffect(() => {
     if (moviesStatus === "idle") {
@@ -16,13 +27,16 @@ const MoviesList = () => {
     }
   }, [dispatch, moviesStatus]);
 
+
+
+
   let content;
 
   if (moviesStatus === "loading") {
   } else if (moviesStatus === "succeeced") {
     content = (
       <div className="movies__container">
-        {moviesState.map((movie) => {
+        {filteredMovie.map((movie) => {
           return <Card movie={movie} key={movie.id} />;
         })}
       </div>
