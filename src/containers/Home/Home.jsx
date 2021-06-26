@@ -1,5 +1,5 @@
-import Navigation from "../../components/Navigations/Navigation";
 import "./Home.scss";
+import Navigation from "../../components/Navigations/Navigation";
 import MoviesList from "../../components/MoviesList/MoviesList";
 
 const Home = () => {

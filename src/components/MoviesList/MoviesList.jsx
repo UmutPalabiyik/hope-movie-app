@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
 import Card from "../Card/Card";
+import Slider from "../UI/Slider/Slider"
 import "./MoviesList.scss";
+import request from "../../requests";
 
 const MoviesList = () => {
   const dispatch = useDispatch();
-
 
   /* Handle movies */
   const moviesStatus = useSelector((state) => state.movies.status);
@@ -15,24 +16,26 @@ const MoviesList = () => {
 
   /* Handle header input  */
   const inputValue = useSelector((state) => state.movies.inputValue);
-  
 
-  const filteredMovie = moviesState.filter(movie => movie.original_title.toLowerCase().includes(inputValue));
+  /*  Handle movies heading */
+  const moviesMoviesHeading = useSelector(
+    (state) => state.movies.moviesHeading
+  );
 
-
+  const filteredMovie = moviesState.filter((movie) =>
+    movie.original_title.toLowerCase().includes(inputValue)
+  );
 
   useEffect(() => {
     if (moviesStatus === "idle") {
-      dispatch(fetchMovies("selamlar selamlar"));
+      dispatch(fetchMovies(request.fetchPopular));
     }
   }, [dispatch, moviesStatus]);
-
-
-
 
   let content;
 
   if (moviesStatus === "loading") {
+    <div>selamlar</div>;
   } else if (moviesStatus === "succeeced") {
     content = (
       <div className="movies__container">
@@ -47,7 +50,8 @@ const MoviesList = () => {
 
   return (
     <div className="movies">
-      <div className="movies__heading">TRENDING</div>
+      <div className="movies__heading">{moviesMoviesHeading}</div>
+      <Slider />
       {content}
     </div>
   );

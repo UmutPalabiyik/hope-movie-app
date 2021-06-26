@@ -1,19 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
-import request from "../../requests";
 
 
 
-export const fetchMovies = createAsyncThunk("movies/fetch", async (param) => {
-    const response = await axios.get(`${request.fetchNowPlaying}`);
+
+export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
+    const response = await axios.get(`${arg}`);
     return response.data.results
 
 })
 
 
+
+
 const initialState = {
     movies: [],
     inputValue : "",
+    moviesHeading: "POPULAR",
     status: "idle",
     error: null
 }
@@ -24,6 +27,10 @@ const moviesSlice = createSlice({
     reducers: {
         handleInputValue: (state, action) => {
             state.inputValue = action.payload.toLowerCase()
+        },
+
+        handleMoviesHeading: (state, action) => {
+            state.moviesHeading = action.payload
         }
     },
     extraReducers: {
@@ -32,7 +39,7 @@ const moviesSlice = createSlice({
         },
         [fetchMovies.fulfilled]: (state, action) => {
             state.status = "succeeced";
-            state.movies = state.movies.concat(action.payload)
+            state.movies = action.payload
         },
         [fetchMovies.error]: (state, action) => {
             state.status = "failed";
@@ -45,5 +52,5 @@ const moviesSlice = createSlice({
 
 
 
-export const { handleInputValue } = moviesSlice.actions;
+export const { handleInputValue, handleMoviesHeading } = moviesSlice.actions;
 export default moviesSlice.reducer;

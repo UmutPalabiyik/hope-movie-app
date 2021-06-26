@@ -1,7 +1,7 @@
 import "./Header.scss"
 import { RiSearchLine } from 'react-icons/ri';
 import { handleInputValue } from "../../feautures/movies/moviesSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const Header = () => {
@@ -12,8 +12,6 @@ const Header = () => {
 
     }
 
-    const inputValuee = useSelector(state => state.movies.inputValue);
-    
 
     return(
         <div className="header">
@@ -24,7 +22,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
-    )
+    )   
 }
 
 
