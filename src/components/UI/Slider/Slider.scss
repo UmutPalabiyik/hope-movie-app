@@ -1,13 +1,9 @@
 .slider{
     height: 300px;
-    width: 1200px;
-
-    img{
-        height: 100%;
-        object-fit: cover;
-    }
-    
-
-
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
 }
+
 
