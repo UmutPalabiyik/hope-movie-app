@@ -1,22 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
 .nav {
-    width: 300px;
+
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-direction: column;
+
   &__list {
     display: flex;
-    flex-direction: column;
+    
+    
+
   }
 
   &__item {
     margin-bottom: 1.2rem;
-    border-radius: 0 .5rem .5rem 0;
+    margin-left: 2rem;
     background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
-
+    border-radius: 1.25rem;
     padding: .8rem 2.5rem;
     text-align: center;
     cursor: pointer;

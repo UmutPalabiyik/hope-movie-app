@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
+
 import Card from "../Card/Card";
 import Slider from "../UI/Slider/Slider"
+import Navigation from "../Navigations/Navigation"
+
 import "./MoviesList.scss";
 import request from "../../requests";
 
@@ -32,6 +35,10 @@ const MoviesList = () => {
     }
   }, [dispatch, moviesStatus]);
 
+
+
+  
+
   let content;
 
   if (moviesStatus === "loading") {
@@ -50,8 +57,9 @@ const MoviesList = () => {
 
   return (
     <div className="movies">
-      <div className="movies__heading">{moviesMoviesHeading}</div>
       <Slider />
+      <div className="movies__heading">{moviesMoviesHeading}</div>
+      <Navigation />
       {content}
     </div>
   );

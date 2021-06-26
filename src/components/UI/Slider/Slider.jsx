@@ -1,26 +1,47 @@
 import AwesomeSlider from "react-awesome-slider";
+import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
-import { useSelector } from "react-redux";
+import axios from "../../../axios";
+import { useState, useEffect } from "react";
+import request from "../../../requests";
+
 import "./Slider.scss";
 
 const Slider = () => {
-  const movies = useSelector((state) => state.movies.movies);
+  const [sliderMovies, setSliderMovies] = useState([]);
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
 
+  const AutoplaySlider = withAutoplay(AwesomeSlider);
+
+  useEffect(() => {
+    const fetchSliderMovies = async () => {
+      const movies = await axios.get(request.fetchNowPlaying);
+      setSliderMovies(movies.data.results);
+    };
+    fetchSliderMovies();
+  }, []);
+
   return (
-    <div className="slider">
-      <AwesomeSlider >
-        {movies.map((movie) => {
-          return (
+    <AutoplaySlider
+      className="slider"
+      play={true}
+      cancelOnInteraction={false} // should stop playing on user interaction
+      interval={2000}
+      mobileTouch={true}
+    >
+      {sliderMovies.map((movie) => {
+        return (
+          <div slider__container>
             <img
-              /* style={{ maxWidth: "1200px" }} */
-              data-src={`${baseImgUrl}${movie.backdrop_path}`}
+              src={`${baseImgUrl}${movie.backdrop_path}`}
+              alt={movie.title}
             />
-          );
-        })}
-      </AwesomeSlider>
-    </div>
+          </div>
+        );
+      })}
+    </AutoplaySlider>
   );
 };
 
 export default Slider;
+

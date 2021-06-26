@@ -11,8 +11,6 @@ export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
 })
 
 
-
-
 const initialState = {
     movies: [],
     inputValue : "",
