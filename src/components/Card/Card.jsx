@@ -4,7 +4,7 @@ const Card = ({ movie }) => {
 
     const baseImgUrl = "https://image.tmdb.org/t/p/original";
 
-    const {original_title, overview, vote_average, poster_path} = movie;
+    const {title, overview, vote_average, poster_path} = movie;
 
  
 
@@ -13,12 +13,12 @@ const Card = ({ movie }) => {
             <div className="card__front">
                 <img className="card__poster" src={`${baseImgUrl}${poster_path}`} alt="" />
                 <p className="card__vote">{`${Number.isInteger(vote_average) ?  vote_average+".0" : vote_average   }`}</p>
-                <div className="card__title">{original_title.substring(0, 20)}</div>
+                <div className="card__title">{title.substring(0, 20)}</div>
             </div>
 
 
             <div className="card__back">
-                <div className="card__title">{original_title}</div>
+                <div className="card__title">{title}</div>
                 <div className="card__overview">{overview}</div>
             </div>
         </div>

@@ -15,7 +15,7 @@ const Slider = () => {
 
   useEffect(() => {
     const fetchSliderMovies = async () => {
-      const movies = await axios.get(request.fetchNowPlaying);
+      const movies = await axios.get(request.fetchTrending);
       setSliderMovies(movies.data.results);
     };
     fetchSliderMovies();

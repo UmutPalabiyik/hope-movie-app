@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import request from "../../requests"
 
 
 
@@ -15,6 +16,7 @@ const initialState = {
     movies: [],
     inputValue : "",
     moviesHeading: "POPULAR",
+    currentLink: request.fetchPopular(),
     status: "idle",
     error: null
 }

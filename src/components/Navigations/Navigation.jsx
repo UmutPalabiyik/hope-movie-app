@@ -22,7 +22,7 @@ const Navigation = () => {
             href="/"
             className="nav__link"
             onClick={() => {
-              handleLinks(request.fetchPopular);
+              handleLinks(request.fetchPopular());
               handleHeading("POPULAR")
             }}
           >
@@ -34,7 +34,7 @@ const Navigation = () => {
             href="/"
             className="nav__link"
             onClick={() => {
-              handleLinks(request.fetchUpComing);
+              handleLinks(request.fetchUpComing());
               handleHeading("UP COMING")
             }}
           >
@@ -46,11 +46,11 @@ const Navigation = () => {
             href="/"
             className="nav__link"
             onClick={() => {
-              handleLinks(request.fetchTopRated);
-              handleHeading("TOP RATED")
+              handleLinks(request.fetchNowPlaying());
+              handleHeading("NOW PLAYING")
             }}
           >
-            Top Rated
+            Now Playing
           </div>
         </li>
       </ul>
