@@ -40,29 +40,28 @@ const MoviesList = () => {
 
   // Handle pagination
   useEffect(() => {
-    prevNextPage();
-  },[currentPage]);
+    console.log("sayfa")
+    if (moviesHeading === "POPULAR") {
+      dispatch(fetchMovies(request.fetchPopular(currentPage)));
+    } else if (moviesHeading === "NOW PLAYING") {
+      dispatch(fetchMovies(request.fetchPopular(currentPage)));
+    } else if (moviesHeading === "UP COMING") {
+      dispatch(fetchMovies(request.fetchUpComing(currentPage)));
+    } 
+    
+  }, [currentPage, dispatch, moviesHeading]);
 
   // Reset current page number
   const resetPageNumber = () => {
     setCurrentPage(1);
   }
 
-  
   useEffect(() => {
     resetPageNumber()
   },[moviesHeading])
 
 
-  const prevNextPage = () => {
-    if (moviesHeading === "POPULAR") {
-      dispatch(fetchMovies(request.fetchPopular(currentPage)));
-    } else if (moviesHeading === "NOW PLAYING") {
-      dispatch(fetchMovies(request.fetchNowPlaying(currentPage)));
-    } else if (moviesHeading === "UP COMING") {
-      dispatch(fetchMovies(request.fetchUpComing(currentPage)));
-    } 
-  };
+ 
 
   useEffect(() => {
     if (moviesStatus === "idle") {
@@ -108,4 +107,5 @@ const MoviesList = () => {
   );
 };
 
-export default MoviesList;
+export default MoviesList
+

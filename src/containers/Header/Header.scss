@@ -10,7 +10,7 @@
   justify-content: center;
 
   &__input-container {
-    width: 20vw;
+    width: 25vw;
     min-width: 200px;
     height: 50px;
     position: relative;
@@ -19,9 +19,9 @@
   &__input {
     font-size: 2rem;
     background-color: transparent;
-    padding: 0 0 .5rem 1rem;
+    padding: 0 0 0.5rem 1rem;
     border: 0;
-    border-bottom: 5px solid rgba(255, 0, 0, .5);
+    border-bottom: 5px solid rgba(255, 0, 0, 0.5);
     color: red;
 
     position: absolute;
@@ -30,24 +30,41 @@
     top: 0;
     left: 0;
 
-    transition: all .2s;
+    transition: all 0.2s;
 
     &:focus {
-      border-bottom: 5px solid rgba(255, 0, 0, .8);
+      border-bottom: 5px solid rgba(255, 0, 0, 0.8);
     }
 
-    &:focus + svg{
-      color: rgba(255, 0, 0, .8);
+    &:focus + svg {
+      color: rgba(255, 0, 0, 0.8);
     }
   }
 
   &__icon {
-    color: rgba(255, 0, 0, .5);
+    color: rgba(255, 0, 0, 0.5);
     font-size: 2.2rem;
     position: absolute;
     margin-right: 1.5rem;
     right: 0;
     cursor: pointer;
-    transition: all .2s;
+    transition: all 0.2s;
+  }
+}
+
+/* Media queries */
+@media (max-width: 1100px) {
+  .header {
+    &__input-container {
+      width: 60vw;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .header {
+    &__input-container {
+      width: 60vw;
+    }
   }
 }
