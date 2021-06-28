@@ -13,6 +13,7 @@ const Slider = () => {
 
   const AutoplaySlider = withAutoplay(AwesomeSlider);
 
+  // fetch top rated movies for slider
   useEffect(() => {
     const fetchSliderMovies = async () => {
       const movies = await axios.get(request.fetchTrending);

@@ -14,6 +14,8 @@ const Navigation = () => {
     dispatch(handleMoviesHeading(heading))
   }
 
+
+
   return (
     <div className="nav">
       <ul className="nav__list">

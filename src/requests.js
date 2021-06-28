@@ -8,8 +8,8 @@ const requests = {
   fetchHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
   fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
   fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
-  fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
 
+  fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
   fetchPopular: (page = 1) => {
     return `/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
   },
@@ -22,5 +22,6 @@ const requests = {
     return `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
   },
 };
+
 
 export default requests;

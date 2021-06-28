@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
-import request from "../../requests"
+
 
 
 
 
 export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
+    console.log("url", arg)
     const response = await axios.get(`${arg}`);
     return response.data.results
 
@@ -16,7 +17,6 @@ const initialState = {
     movies: [],
     inputValue : "",
     moviesHeading: "POPULAR",
-    currentLink: request.fetchPopular(),
     status: "idle",
     error: null
 }
@@ -31,7 +31,8 @@ const moviesSlice = createSlice({
 
         handleMoviesHeading: (state, action) => {
             state.moviesHeading = action.payload
-        }
+        },
+
     },
     extraReducers: {
         [fetchMovies.pending] : (state, action) => {
@@ -46,7 +47,6 @@ const moviesSlice = createSlice({
             state.error = action.payload
 ;        }
     }
-
 
 })
 
