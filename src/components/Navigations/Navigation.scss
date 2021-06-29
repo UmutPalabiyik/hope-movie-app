@@ -13,16 +13,8 @@
   &__item {
     margin-bottom: 1.2rem;
     margin-left: 2rem;
-    background: -webkit-linear-gradient(
-      to right,
-      #240b36,
-      #c31432
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #240b36,
-      #c31432
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    background: #f9AA33; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     border-radius: 1.25rem;
     padding: 0.8rem 2.5rem;

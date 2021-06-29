@@ -23,6 +23,8 @@ const MoviesList = () => {
   const moviesError = useSelector((state) => state.movies.error);
   const moviesHeading = useSelector((state) => state.movies.moviesHeading); // It's for pagination
 
+  console.log(moviesState)
+
   // Handle header input
   const inputValue = useSelector((state) => state.movies.inputValue);
 
@@ -40,11 +42,11 @@ const MoviesList = () => {
 
   // Handle pagination
   useEffect(() => {
-    console.log("sayfa")
+
     if (moviesHeading === "POPULAR") {
       dispatch(fetchMovies(request.fetchPopular(currentPage)));
     } else if (moviesHeading === "NOW PLAYING") {
-      dispatch(fetchMovies(request.fetchPopular(currentPage)));
+      dispatch(fetchMovies(request.fetchNowPlaying(currentPage)));
     } else if (moviesHeading === "UP COMING") {
       dispatch(fetchMovies(request.fetchUpComing(currentPage)));
     } 
@@ -60,8 +62,6 @@ const MoviesList = () => {
     resetPageNumber()
   },[moviesHeading])
 
-
- 
 
   useEffect(() => {
     if (moviesStatus === "idle") {
@@ -83,7 +83,7 @@ const MoviesList = () => {
           }}
         />
         {filteredMovie.map((movie) => {
-          return <Card movie={movie} key={movie.id} />;
+          return <Card movie={movie} key={movie.id} moviesHeading={moviesHeading} currentPage={currentPage}/>;
         })}
         <BiRightArrow
           className="movies__arrow movies__arrow--right"

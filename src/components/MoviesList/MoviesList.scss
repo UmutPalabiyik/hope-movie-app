@@ -26,81 +26,82 @@
 
   &__arrow {
     position: absolute;
-    color: #dd181f;
+    color: #d3262c;
     cursor: pointer;
+    transition: 0.2s all;
 
+    &:hover {
+      color: #e90a11;
+    }
 
     &--left {
       font-size: 4rem;
-      left: .75rem;
+      left: 0.75rem;
     }
 
     &--right {
       font-size: 4rem;
-      right: .75rem;
+      right: 0.75rem;
     }
   }
 }
 
-@media (max-width:  1505px){
-  .movies{
-    &__arrow{
+@media (max-width: 1505px) {
+  .movies {
+    &__arrow {
       bottom: 5%;
     }
   }
 }
 
-@media (max-width:  1250px){
-  .movies{
+@media (max-width: 1250px) {
+  .movies {
     font-size: 3rem;
-    &__arrow{
-
-      &--left{
+    &__arrow {
+      &--left {
         left: 0;
       }
 
-      &--right{
+      &--right {
         right: 0;
       }
     }
   }
 }
 
-@media (max-width: 700px){
-  .movies{
-
-    &__heading{
+@media (max-width: 700px) {
+  .movies {
+    &__heading {
       padding-top: 3rem;
     }
 
-    &__arrow{
+    &__arrow {
       bottom: 5%;
       font-size: 3rem;
 
-      &--left{
+      &--left {
         left: 2.75rem;
       }
 
-      &--right{
+      &--right {
         right: 2.75rem;
       }
     }
   }
 }
 
-
-@media (max-width: 550px){
-  .movies{
-    &__arrow{
+@media (max-width: 550px) {
+  .movies {
+    &__arrow {
       bottom: 1.75rem;
       font-size: 3.5rem;
 
-      &--left{
+      &--left {
         left: 0.2rem;
       }
 
-      &--right{
-        right: .2rem;
+      &--right {
+        right: 0.2rem;
       }
     }
   }
