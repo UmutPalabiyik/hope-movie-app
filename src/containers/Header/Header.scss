@@ -55,6 +55,7 @@
 /* Media queries */
 @media (max-width: 1100px) {
   .header {
+    margin-bottom: 2rem;
     &__input-container {
       width: 60vw;
     }
@@ -63,6 +64,7 @@
 
 @media (max-width: 700px) {
   .header {
+    margin-bottom: 1rem;
     &__input-container {
       width: 60vw;
     }
