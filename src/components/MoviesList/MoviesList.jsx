@@ -23,7 +23,7 @@ const MoviesList = () => {
   const moviesError = useSelector((state) => state.movies.error);
   const moviesHeading = useSelector((state) => state.movies.moviesHeading); // It's for pagination
 
-  console.log(moviesState)
+
 
   // Handle header input
   const inputValue = useSelector((state) => state.movies.inputValue);

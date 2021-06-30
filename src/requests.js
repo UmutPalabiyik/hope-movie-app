@@ -21,6 +21,11 @@ const requests = {
   fetchUpComing: (page = 1) => {
     return `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
   },
+
+  fetchMovieDetails:(movieId) =>  {
+    
+      return `https://api.themoviedb.org/3/movie/${API_KEY}/credits?api_key=${movieId}&language=en-US`
+    }
 };
 
 

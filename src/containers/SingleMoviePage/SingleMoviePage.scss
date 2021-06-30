@@ -6,7 +6,46 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
-        
-        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.75);
+        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.55);
+        display: flex;
+    }
+
+    &__information{
+        padding-left: 4rem;
+        padding-top: 17rem ;
+        width: 40%;
+    }
+
+    &__title{
+        color: #ffff;
+        font-size: 5rem;
+    }
+    &__rate{
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    &__average{
+        font-size: 1.8rem;
+        color: #ffff;
+        margin-left: 1.5rem;
+    }
+    &__overview{
+        color: rgb(196, 195, 195);
+        font-size: 1.5rem;
+        margin-top: 3rem;
+        line-height: 2.3rem;
+        width: 30vw;
+    }
+
+
+    &__heading{
+        color: #e50914;
+        font-size: 2rem;
+    }
+
+    label{
+        color: #ffff;
     }
 }

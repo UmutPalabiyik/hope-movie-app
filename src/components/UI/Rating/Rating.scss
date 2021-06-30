@@ -1,0 +1,22 @@
+.rating{
+    &__full{
+        color: #e50914;
+        font-size: 2rem;
+        margin-left: 0.5rem;
+    }
+
+    &__half{
+        color: #e50914;
+        font-size: 2rem;
+        margin-left: 0.5rem;
+    }
+
+    &__empty{
+        font-size: 2rem;
+        margin-left: 0.5rem;
+    }
+
+    path{
+        color: #e50914;
+    }
+}
