@@ -8,7 +8,7 @@ const Rating = ({ rating }) => {
     <div className="rating">
       {rating >= 1 ? (
         <FaStar className="rating__full" />
-      ) : 0.9 > rating >= 0.5 ? (
+      ) : rating >= 0.5 ? (
         <FaStarHalfAlt  className="rating__half"/>
       ) : (
         <FaRegStar className="rating__empty"/>
@@ -16,7 +16,7 @@ const Rating = ({ rating }) => {
 
       {rating >= 2 ? (
         <FaStar className="rating__full" />
-      ) : 1.9 > rating >= 1.5 ? (
+      ) : rating >= 1.5 ? (
         <FaStarHalfAlt className="rating__half"/>
       ) : (
         <FaRegStar className="rating__empty"/>
@@ -24,7 +24,7 @@ const Rating = ({ rating }) => {
 
       {rating >= 3 ? (
         <FaStar className="rating__full" />
-      ) : 2.9 > rating >= 2.5 ? (
+      ) : rating >= 2.5 ? (
         <FaStarHalfAlt className="rating__half"/>
       ) : (
         <FaRegStar className="rating__empty"/>
@@ -32,7 +32,7 @@ const Rating = ({ rating }) => {
 
       {rating >= 4 ? (
         <FaStar className="rating__full" />
-      ) : 3.9 > rating >= 3.5 ? (
+      ) : rating >= 3.5 ? (
         <FaStarHalfAlt className="rating__half"/>
       ) : (
         <FaRegStar className="rating__empty"/>
@@ -40,7 +40,7 @@ const Rating = ({ rating }) => {
 
       {rating >= 5 ? (
         <FaStar className="rating__full" />
-      ) : 4.9 > rating >= 4.5 ? (
+      ) :  rating >= 4.5 ? (
         <FaStarHalfAlt className="rating__half"/>
       ) : (
         <FaRegStar className="rating__empty"/>

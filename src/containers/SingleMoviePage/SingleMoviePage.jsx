@@ -1,13 +1,24 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import request from "../../requests";
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
 import "./SingleMoviePage.scss";
 import Rating from "../../components/UI/Rating/Rating";
-
+import axios from "axios";
 
 const SingleMoviePage = ({ match }) => {
   const dispatch = useDispatch();
+  const [movieDetails, setMovieDetails] = useState({});
+  const [movieCredits, setMovieCredits] = useState({});
+
+  // number month to string
+  const date = new Date(movieDetails.release_date);
+  const dateWithMonthName =
+    date.getFullYear() +
+    "-" +
+    date.toLocaleString("en-EN", { month: "long" }) +
+    "-" +
+    date.getDay();
 
   /*  params */
   const movieId = match.params.id;
@@ -18,17 +29,32 @@ const SingleMoviePage = ({ match }) => {
   const movies = useSelector((state) => state.movies.movies);
   const moviesStatus = useSelector((state) => state.movies.status);
 
-  /* movieDetails reducer handle */
-  const movieDetails = useSelector((state) => state.movieDetails.movieDetails);
-  const movieDetailsStatus = useSelector((state) => state.movieDetails.status);
-
   /* base urls */
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const movieDetailUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=c057c067b76238e7a64d3ba8de37076e&language=en-US`;
+  const movieCastUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=c057c067b76238e7a64d3ba8de37076e&language=en-US`;
 
- 
+  // fetch movie cast
+  useEffect(() => {
+    const fetchMovieCast = async () => {
+      let response = await axios.get(movieCastUrl);
+      response = response.data;
+      setMovieCredits(response);
+    };
+    fetchMovieCast();
+  }, [movieCastUrl]);
 
-  
+  // fetch movie details
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      let response = await axios.get(movieDetailUrl);
+      response = response.data;
+      setMovieDetails(response);
+    };
+
+    fetchMovieDetails();
+  }, [movieDetailUrl]);
+
   let content;
   if (moviesStatus === "loading") {
     <div>Loading ...</div>;
@@ -45,7 +71,7 @@ const SingleMoviePage = ({ match }) => {
           })`,
         }}
       >
-        <div className="single-movie__information">
+        <div className="single-movie__details">
           <h1 className="single-movie__title">{movie.title}</h1>
           <div className="single-movie__rate">
             <Rating
@@ -57,19 +83,39 @@ const SingleMoviePage = ({ match }) => {
             </div>
           </div>
           <p className="single-movie__overview">{movie.overview}</p>
-          <p className="single-movie__genres">
-            <label>Genres</label>
-{/*             {movieDetail.genres.map((genre) => {
-              return <label>{genre.name}</label>;
-            })} */}
-          </p>
+
+          <div className="single-movie__informations">
+            <label className="single-movie__informations-heading">Genres</label>
+            <div className="single-movie__informations-container">
+              {movieDetails.genres?.map((genre) => {
+                return <div className="single-movie__info">{genre.name}</div>;
+              })}
+            </div>
+          </div>
+
+          <div className="single-movie__informations">
+            <label className="single-movie__informations-heading">
+              Starring
+            </label>
+            <div className="single-movie__informations-container">
+              {movieCredits.cast?.slice(0, 5).map((star) => {
+                return <div className="single-movie__info">{star.name}</div>;
+              })}
+            </div>
+          </div>
+
+          <div className="single-movie__informations">
+            <label className="single-movie__informations-heading">
+              Release Date
+            </label>
+            <div className="single-movie__informations-container">
+              <div className="single-movie__info">{dateWithMonthName}</div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
-
-  let details;
-  /* if(m) */
 
   useEffect(() => {
     if (genre === "POPULAR") {
@@ -80,8 +126,6 @@ const SingleMoviePage = ({ match }) => {
       dispatch(fetchMovies(request.fetchUpComing(page)));
     }
   }, [dispatch, genre, page]);
-
-
 
   return <div className="single-movie">{content}</div>;
 };

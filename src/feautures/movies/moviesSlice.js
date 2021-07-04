@@ -6,8 +6,6 @@ export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
   return response.data.results;
 });
 
-
-
 const initialState = {
   movies: [],
   inputValue: "",
@@ -40,8 +38,6 @@ const moviesSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
-
-
   },
 });
 
