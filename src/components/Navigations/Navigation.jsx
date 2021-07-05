@@ -1,10 +1,13 @@
 import "./Navigation.scss";
 import request from "../../requests";
-import { useDispatch } from "react-redux";
-import { fetchMovies, handleMoviesHeading } from "../../feautures/movies/moviesSlice";
+import { useDispatch,useSelector } from "react-redux";
+import { fetchMovies, handleMoviesHeading, handleCurrentPage } from "../../feautures/movies/moviesSlice";
+import {NavLink } from "react-router-dom";
+
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const moviesCurrentPage = useSelector(state => state.movies.currentPage)
 
   const handleLinks = (link) => {
     dispatch(fetchMovies(link));
@@ -20,40 +23,43 @@ const Navigation = () => {
     <div className="nav">
       <ul className="nav__list">
         <li className="nav__item">
-          <div
-            href="/"
+          <NavLink
+            to={`/page/${moviesCurrentPage}`}
             className="nav__link"
             onClick={() => {
+              dispatch(handleCurrentPage(1))
               handleLinks(request.fetchPopular());
               handleHeading("POPULAR")
             }}
           >
             Popular
-          </div>
+          </NavLink>
         </li>
         <li className="nav__item">
-          <div
-            href="/"
+          <NavLink
+            to={`/page/${moviesCurrentPage}`}
             className="nav__link"
             onClick={() => {
+              dispatch(handleCurrentPage(1))
               handleLinks(request.fetchUpComing());
               handleHeading("UP COMING")
             }}
           >
             Upcoming
-          </div>
+          </NavLink>
         </li>
         <li className="nav__item">
-          <div
-            href="/"
+          <NavLink
+            to={`/page/${moviesCurrentPage}`}
             className="nav__link"
             onClick={() => {
+              dispatch(handleCurrentPage(1))
               handleLinks(request.fetchNowPlaying());
               handleHeading("NOW PLAYING")
             }}
           >
             Now Playing
-          </div>
+          </NavLink>
         </li>
       </ul>
     </div>

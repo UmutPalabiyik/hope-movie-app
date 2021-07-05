@@ -2,19 +2,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import request from "../../requests";
+import axios from "axios";
+
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
 import Rating from "../../components/UI/Rating/Rating";
-import axios from "axios";
+import request from "../../requests";
+
 import "./SingleMoviePage.scss";
 
 const SingleMoviePage = ({ match }) => {
   const dispatch = useDispatch();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
+
+
   const history = useHistory();
 
-  console.log("adasd", movieDetails)
 
   // number month to string
   const date = new Date(movieDetails.release_date);
@@ -33,6 +36,8 @@ const SingleMoviePage = ({ match }) => {
   /* movies reducer handle */
   const movies = useSelector((state) => state.movies.movies);
   const moviesStatus = useSelector((state) => state.movies.status);
+  const moviesHeading = useSelector(state => state.movies.moviesHeading);
+  const moviesCurrentPage = useSelector(state => state.movies.currentPage)
 
   /* base urls */
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
@@ -41,7 +46,15 @@ const SingleMoviePage = ({ match }) => {
 
   // go home page
   const goHOme = () => {
-    history.push("/")
+    if (moviesHeading === "POPULAR") {
+      dispatch(fetchMovies(request.fetchPopular(moviesCurrentPage)));
+    } else if (moviesHeading === "NOW PLAYING") {
+      dispatch(fetchMovies(request.fetchNowPlaying(moviesCurrentPage)));
+    } else if (moviesHeading === "UP COMING") {
+      dispatch(fetchMovies(request.fetchUpComing(moviesCurrentPage)));
+    } 
+
+    history.push(`/page/${moviesCurrentPage}`)
   }
 
   // fetch movie cast

@@ -9,11 +9,13 @@ const App = () => {
     <Router>
       <Switch>
         <div className="app">
-          <Route exact path="/">
+          <Route exact path={["/","/page/:number"] }>
             <Header />
             <Home />
           </Route>
-          <Route path="/movie/:page/:genre/:id" component={SingleMoviePage}/>>
+
+
+          <Route path="/movie/:page/:genre/:id" component={SingleMoviePage} />
         </div>
       </Switch>
     </Router>

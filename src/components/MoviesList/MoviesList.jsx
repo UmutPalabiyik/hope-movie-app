@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchMovies } from "../../feautures/movies/moviesSlice";
-
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { useHistory } from "react-router-dom";
 
+import { fetchMovies, handleCurrentPage } from "../../feautures/movies/moviesSlice";
 import Card from "../Card/Card";
 import Slider from "../UI/Slider/Slider";
 import Navigation from "../Navigations/Navigation";
@@ -14,16 +14,16 @@ import request from "../../requests";
 const MoviesList = () => {
   const dispatch = useDispatch();
 
-  // Current Page
-  const [currentPage, setCurrentPage] = useState(1);
 
   // Handle movies states
   const moviesStatus = useSelector((state) => state.movies.status);
   const moviesState = useSelector((state) => state.movies.movies);
   const moviesError = useSelector((state) => state.movies.error);
   const moviesHeading = useSelector((state) => state.movies.moviesHeading); // It's for pagination
+  const moviesCurrentPage = useSelector(state => state.movies.currentPage);
 
 
+  let history = useHistory();
 
   // Handle header input
   const inputValue = useSelector((state) => state.movies.inputValue);
@@ -36,31 +36,31 @@ const MoviesList = () => {
 
   // Handle page number
   const handlePageNumber = (nexPage) => {
-    setCurrentPage(page => Math.max(1, Math.min(page + nexPage, 10)))
-   
+
+    dispatch(handleCurrentPage(Math.max(1, Math.min(moviesCurrentPage + nexPage, 10))))
   };
 
   // Handle pagination
   useEffect(() => {
 
     if (moviesHeading === "POPULAR") {
-      dispatch(fetchMovies(request.fetchPopular(currentPage)));
+      dispatch(fetchMovies(request.fetchPopular(moviesCurrentPage)));
     } else if (moviesHeading === "NOW PLAYING") {
-      dispatch(fetchMovies(request.fetchNowPlaying(currentPage)));
+      dispatch(fetchMovies(request.fetchNowPlaying(moviesCurrentPage)));
     } else if (moviesHeading === "UP COMING") {
-      dispatch(fetchMovies(request.fetchUpComing(currentPage)));
+      dispatch(fetchMovies(request.fetchUpComing(moviesCurrentPage)));
     } 
     
-  }, [currentPage, dispatch, moviesHeading]);
+  }, [moviesCurrentPage, dispatch, moviesHeading]);
 
-  // Reset current page number
-  const resetPageNumber = () => {
-    setCurrentPage(1);
-  }
+  
 
+
+/*   // Reset current page number
   useEffect(() => {
-    resetPageNumber()
-  },[moviesHeading])
+    console.log("RESETLENDİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ")
+    dispatch(handleCurrentPage(1))
+  },[moviesHeading, dispatch]) */
 
 
   useEffect(() => {
@@ -80,15 +80,17 @@ const MoviesList = () => {
           className="movies__arrow movies__arrow--left"
           onClick={() => {
             handlePageNumber(-1)
+            history.push(`/page/${(() => Math.max(1, Math.min(moviesCurrentPage - 1, 10)))() }`)
           }}
         />
         {filteredMovie.map((movie) => {
-          return <Card movie={movie} key={movie.id} moviesHeading={moviesHeading} currentPage={currentPage}/>;
+          return <Card movie={movie} key={movie.id} moviesHeading={moviesHeading} />;
         })}
         <BiRightArrow
           className="movies__arrow movies__arrow--right"
           onClick={() => {
             handlePageNumber(1)
+            history.push(`/page/${(() => Math.max(1, Math.min(moviesCurrentPage + 1, 10)))() }`)
           }}
         />
       </div>

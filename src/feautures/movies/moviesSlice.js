@@ -10,6 +10,7 @@ const initialState = {
   movies: [],
   inputValue: "",
   moviesHeading: "POPULAR",
+  currentPage: 1,
   status: "idle",
   error: null,
 };
@@ -25,6 +26,11 @@ const moviesSlice = createSlice({
     handleMoviesHeading: (state, action) => {
       state.moviesHeading = action.payload;
     },
+    handleCurrentPage: (state, action) => {
+      state.currentPage = action.payload
+    }
+
+    
   },
   extraReducers: {
     [fetchMovies.pending]: (state, action) => {
@@ -41,5 +47,5 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { handleInputValue, handleMoviesHeading } = moviesSlice.actions;
+export const { handleInputValue, handleMoviesHeading, handleCurrentPage } = moviesSlice.actions;
 export default moviesSlice.reducer;

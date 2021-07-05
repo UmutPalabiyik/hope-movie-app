@@ -1,16 +1,20 @@
 import "./Card.scss";
 import {NavLink } from "react-router-dom";
 import {IoMdArrowRoundForward } from "react-icons/io";
+import { useSelector } from "react-redux";
+
+
 
 const Card = ({ movie, moviesHeading, currentPage }) => {
-  const baseImgUrl = "https://image.tmdb.org/t/p/original";
 
+  const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const { title, overview, vote_average, poster_path, id } = movie;
+  const moviesCurrentPage = useSelector(state => state.movies.currentPage)
 
   
 
   return (
-    <NavLink to={`/movie/${currentPage}/${moviesHeading}/${id}`}>
+    <NavLink to={`/movie/${moviesCurrentPage}/${moviesHeading}/${id}`}>
       <div className="card">
         <div className="card__front">
           <img
