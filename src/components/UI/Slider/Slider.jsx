@@ -5,6 +5,7 @@ import axios from "../../../axios";
 import { useState, useEffect } from "react";
 import request from "../../../requests";
 
+
 import "./Slider.scss";
 
 const Slider = () => {
@@ -32,12 +33,16 @@ const Slider = () => {
     >
       {sliderMovies.map((movie) => {
         return (
+          
           <div slider__container>
+
             <img
               src={`${baseImgUrl}${movie.backdrop_path}`}
               alt={movie.title}
             />
+         
           </div>
+         
         );
       })}
     </AutoplaySlider>

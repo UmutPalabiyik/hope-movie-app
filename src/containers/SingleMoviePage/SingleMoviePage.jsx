@@ -1,15 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import request from "../../requests";
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
-import "./SingleMoviePage.scss";
 import Rating from "../../components/UI/Rating/Rating";
 import axios from "axios";
+import "./SingleMoviePage.scss";
 
 const SingleMoviePage = ({ match }) => {
   const dispatch = useDispatch();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
+  const history = useHistory();
+
+  console.log("adasd", movieDetails)
 
   // number month to string
   const date = new Date(movieDetails.release_date);
@@ -33,6 +38,11 @@ const SingleMoviePage = ({ match }) => {
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const movieDetailUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=c057c067b76238e7a64d3ba8de37076e&language=en-US`;
   const movieCastUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=c057c067b76238e7a64d3ba8de37076e&language=en-US`;
+
+  // go home page
+  const goHOme = () => {
+    history.push("/")
+  }
 
   // fetch movie cast
   useEffect(() => {
@@ -71,7 +81,9 @@ const SingleMoviePage = ({ match }) => {
           })`,
         }}
       >
+        
         <div className="single-movie__details">
+        <IoMdArrowRoundBack  className="single-movie__back" onClick={goHOme} size={65} color={"#e50914"}/>
           <h1 className="single-movie__title">{movie.title}</h1>
           <div className="single-movie__rate">
             <Rating
@@ -79,12 +91,14 @@ const SingleMoviePage = ({ match }) => {
               className="single-movie__stars"
             />
             <div className="single-movie__average">
-              {movie.vote_average}(Imdb)
+              {`${
+            Number.isInteger(movie.vote_average) ? movie.vote_average + ".0" : movie.vote_average
+          }`}(Imdb)
             </div>
           </div>
           <p className="single-movie__overview">{movie.overview}</p>
 
-          <div className="single-movie__informations">
+          <div className="single-movie__informations single-movie__informations--genres">
             <label className="single-movie__informations-heading">Genres</label>
             <div className="single-movie__informations-container">
               {movieDetails.genres?.map((genre) => {
@@ -93,18 +107,18 @@ const SingleMoviePage = ({ match }) => {
             </div>
           </div>
 
-          <div className="single-movie__informations">
+          <div className="single-movie__informations single-movie__informations--stars">
             <label className="single-movie__informations-heading">
               Starring
             </label>
             <div className="single-movie__informations-container">
-              {movieCredits.cast?.slice(0, 5).map((star) => {
+              {movieCredits.cast?.slice(0, 4).map((star) => {
                 return <div className="single-movie__info">{star.name}</div>;
               })}
             </div>
           </div>
 
-          <div className="single-movie__informations">
+          <div className="single-movie__informations single-movie__informations--released">
             <label className="single-movie__informations-heading">
               Release Date
             </label>
@@ -112,6 +126,21 @@ const SingleMoviePage = ({ match }) => {
               <div className="single-movie__info">{dateWithMonthName}</div>
             </div>
           </div>
+
+          <div className="single-movie__informations single-movie__informations--production">
+            <label className="single-movie__informations-heading">
+              Production
+            </label>
+            <div className="single-movie__informations-container">
+              {
+                movieDetails.production_companies?.slice(0,1).map( company => {
+                  return <div className="single-movie__info">{company.name}</div>
+                })
+              }
+              
+            </div>
+          </div>
+          
         </div>
       </div>
     );

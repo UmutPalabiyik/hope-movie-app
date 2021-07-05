@@ -1,22 +1,44 @@
-.rating{
-    &__full{
-        color: #e50914;
-        font-size: 2rem;
-        margin-left: 0.5rem;
+.rating {
+  &__star {
+    @for $i from 1 through 10 {
+      &:nth-of-type(#{$i}) {
+        $step: $i/5;
+        animation: slideIn $step + s ease;
+      }
     }
 
-    &__half{
-        color: #e50914;
-        font-size: 2rem;
-        margin-left: 0.5rem;
-    }
+    transition: 0.3s all;
 
-    &__empty{
-        font-size: 2rem;
-        margin-left: 0.5rem;
+    &:hover {
+      transform: scale(1.3)
     }
+  }
 
-    path{
-        color: #e50914;
+  &__full {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  &__half {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  &__empty {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
+
+  path {
+    color: #e50914;
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-500px);
     }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }

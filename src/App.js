@@ -13,7 +13,7 @@ const App = () => {
             <Header />
             <Home />
           </Route>
-          <Route path="/movie/:page/:genre/:id" component={SingleMoviePage} />
+          <Route path="/movie/:page/:genre/:id" component={SingleMoviePage}/>>
         </div>
       </Switch>
     </Router>
