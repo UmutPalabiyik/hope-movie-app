@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
 
-
   &__container {
     min-height: 100vh;
     background-position: top left;
@@ -42,7 +41,7 @@
     font-size: 1.5rem;
     margin-top: 3rem;
     line-height: 2.3rem;
-    width: 30vw;
+    width: 35vw;
   }
 
   &__informations {
@@ -64,7 +63,7 @@
       animation: slideInDetails 2.1s ease;
     }
 
-    &--production{
+    &--production {
       animation: slideInDetails 2.5s ease;
     }
   }
@@ -102,14 +101,13 @@
   &__back {
     cursor: pointer;
     margin-bottom: 7rem;
-    
   }
 
   @keyframes slideInDetails {
     0% {
       transform: translateX(-500px);
     }
-    50%{
+    50% {
       transform: translateX(20px);
     }
     100% {
@@ -118,3 +116,81 @@
   }
 }
 
+@media screen and (max-width: 1900px) {
+  .single-movie {
+    &__overview {
+      width: 50vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .single-movie {
+    &__overview {
+      width: 80vw;
+    }
+
+    &__back {
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .single-movie {
+    &__rate {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__title {
+      font-size: 3.5rem;
+    }
+
+    &__average {
+      margin: 0;
+    }
+
+    &__back {
+      margin-bottom: 2rem;
+    }
+
+    &__informations-heading {
+      font-size: 1.3rem;
+    }
+
+    &__info {
+      font-size: 1.3rem;
+    }
+
+    &__overview {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .single-movie {
+    &__informations {
+      flex-direction: column;
+      align-items: flex-start;
+
+      &-container{
+        margin: 0;
+      }
+    }
+
+    &__info{
+      margin: 0;
+    }
+  }
+}
+
+
+@media screen and (max-width: 475px) {
+  .single-movie {
+    &__details{
+      padding-left: 2rem;
+    }
+  }
+}
