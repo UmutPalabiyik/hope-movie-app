@@ -25,7 +25,11 @@ const requests = {
   fetchMovieDetails:(movieId) =>  {
     
       return `https://api.themoviedb.org/3/movie/${API_KEY}/credits?api_key=${movieId}&language=en-US`
-    }
+    },
+
+  fetchSimiliarMovies:(movieId) => {
+    return `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`
+  }
 };
 
 

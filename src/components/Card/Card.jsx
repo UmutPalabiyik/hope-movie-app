@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 
 
 
-const Card = ({ movie, moviesHeading, currentPage }) => {
+const Card = ({ movie }) => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const { title, overview, vote_average, poster_path, id } = movie;
+
   const moviesCurrentPage = useSelector(state => state.movies.currentPage)
+  const moviesHeading = useSelector(state => state.movies.moviesHeading)
 
   
 

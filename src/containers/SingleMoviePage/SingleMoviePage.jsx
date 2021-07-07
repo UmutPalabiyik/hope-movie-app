@@ -9,15 +9,14 @@ import Rating from "../../components/UI/Rating/Rating";
 import request from "../../requests";
 
 import "./SingleMoviePage.scss";
+import SimilarMovies from "../../components/SimilarMovies/SimilarMovies";
 
 const SingleMoviePage = ({ match }) => {
   const dispatch = useDispatch();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
 
-
   const history = useHistory();
-
 
   // number month to string
   const date = new Date(movieDetails.release_date);
@@ -36,8 +35,8 @@ const SingleMoviePage = ({ match }) => {
   /* movies reducer handle */
   const movies = useSelector((state) => state.movies.movies);
   const moviesStatus = useSelector((state) => state.movies.status);
-  const moviesHeading = useSelector(state => state.movies.moviesHeading);
-  const moviesCurrentPage = useSelector(state => state.movies.currentPage)
+  const moviesHeading = useSelector((state) => state.movies.moviesHeading);
+  const moviesCurrentPage = useSelector((state) => state.movies.currentPage);
 
   /* base urls */
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
@@ -52,10 +51,10 @@ const SingleMoviePage = ({ match }) => {
       dispatch(fetchMovies(request.fetchNowPlaying(moviesCurrentPage)));
     } else if (moviesHeading === "UP COMING") {
       dispatch(fetchMovies(request.fetchUpComing(moviesCurrentPage)));
-    } 
+    }
 
-    history.push(`/page/${moviesCurrentPage}`)
-  }
+    history.push(`/page/${moviesCurrentPage}`);
+  };
 
   // fetch movie cast
   useEffect(() => {
@@ -94,20 +93,19 @@ const SingleMoviePage = ({ match }) => {
           })`,
         }}
       >
-        
         <div className="single-movie__details">
-        <IoMdArrowRoundBack  className="single-movie__back" onClick={goHOme} size={65} color={"#e50914"}/>
+          <IoMdArrowRoundBack
+            className="single-movie__back"
+            onClick={goHOme}
+            size={65}
+            color={"#e50914"}
+          />
           <h1 className="single-movie__title">{movie.title}</h1>
           <div className="single-movie__rate">
             <Rating
               rating={movie.vote_average}
               className="single-movie__stars"
             />
-            <div className="single-movie__average">
-              {`${
-            Number.isInteger(movie.vote_average) ? movie.vote_average + ".0" : movie.vote_average
-          }`}(Imdb)
-            </div>
           </div>
           <p className="single-movie__overview">{movie.overview}</p>
 
@@ -145,17 +143,20 @@ const SingleMoviePage = ({ match }) => {
               Production
             </label>
             <div className="single-movie__informations-container">
-              {
-                movieDetails.production_companies?.slice(0,1).map( company => {
-                  return <div className="single-movie__info">{company.name}</div>
-                })
-              }
-              
+              {movieDetails.production_countries?.slice(0, 2).map((country) => {
+                return <div className="single-movie__info">{country.name}</div>;
+              })}
             </div>
+
           </div>
           
         </div>
+              
+           <SimilarMovies movieId={movieId}/>
+            
+      
       </div>
+
     );
   }
 
@@ -169,6 +170,7 @@ const SingleMoviePage = ({ match }) => {
     }
   }, [dispatch, genre, page]);
 
+  console.log("single movie çalıştı");
   return <div className="single-movie">{content}</div>;
 };
 

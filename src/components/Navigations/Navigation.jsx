@@ -1,74 +1,59 @@
 import "./Navigation.scss";
-import request from "../../requests";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchMovies,
   handleMoviesHeading,
   handleCurrentPage,
 } from "../../feautures/movies/moviesSlice";
 import { NavLink, useHistory } from "react-router-dom";
 
 const Navigation = () => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const moviesCurrentPage = useSelector((state) => state.movies.currentPage);
+  const moviesHeading = useSelector(state => state.movies.moviesHeading)
+  
 
-  const handleLinks = (link) => {
-    dispatch(fetchMovies(link));
-  };
+  const handleLink = (heading) => {
+   
+    dispatch(handleMoviesHeading(heading))
+    dispatch(handleCurrentPage(1)); // reset the current page number each time the buttons are clicked
+    history.push(`/page/${moviesCurrentPage}`)
+  }
 
-  const handleHeading = (heading) => {
-    dispatch(handleMoviesHeading(heading));
-  };
+
 
   return (
     <div className="nav">
       <ul className="nav__list">
-        <li className="nav__item">
+        <li  className={`nav__item ${moviesHeading === "POPULAR" ? "nav__item--active" : " "}`} >
           <NavLink
             to=""
             className="nav__link"
             onClick={() => {
-              console.log("burası çalıştı abi");
+              handleLink("POPULAR","popular")
 
-              dispatch(handleCurrentPage(1));
-              handleLinks(request.fetchPopular());
-              handleHeading("POPULAR");
-              history.push(`/page/${moviesCurrentPage}`)
             }}
           >
             Popular
           </NavLink>
         </li>
-        <li className="nav__item">
+        <li  className={`nav__item ${moviesHeading === "UP COMING" ? "nav__item--active" : " "}`} >
           <NavLink
             to=""
             className="nav__link"
-            onClick={() => {
-              console.log("burası çalıştı abi");
-
-              dispatch(handleCurrentPage(1));
-              handleLinks(request.fetchUpComing());
-              handleHeading("UP COMING");
-              history.push(`/page/${moviesCurrentPage}`)
-              console.log("şuan ki sayfa : ", moviesCurrentPage);
+            onClick={() => { 
+              handleLink("UP COMING","upcoming")
             }}
           >
             Upcoming
           </NavLink>
         </li>
-        <li className="nav__item">
+        <li  className={`nav__item ${moviesHeading === "NOW PLAYING" ? "nav__item--active" : " "}`} >
           <NavLink
             to=""
             className="nav__link"
             onClick={() => {
-              console.log("burası çalıştı abi");
-
-              dispatch(handleCurrentPage(1));
-              handleLinks(request.fetchNowPlaying());
-              handleHeading("NOW PLAYING");
-              history.push(`/page/${moviesCurrentPage}`);
-              console.log("şuan ki sayfa : ", moviesCurrentPage);
+              handleLink("NOW PLAYING","nowplaying")
             }}
           >
             Now Playing

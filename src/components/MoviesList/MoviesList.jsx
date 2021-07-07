@@ -42,7 +42,7 @@ const MoviesList = () => {
 
   // Handle pagination
   useEffect(() => {
-
+      console.log("Heading değişti")
     if (moviesHeading === "POPULAR") {
       dispatch(fetchMovies(request.fetchPopular(moviesCurrentPage)));
     } else if (moviesHeading === "NOW PLAYING") {
@@ -56,12 +56,6 @@ const MoviesList = () => {
   
 
 
-/*   // Reset current page number
-  useEffect(() => {
-    console.log("RESETLENDİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ")
-    dispatch(handleCurrentPage(1))
-  },[moviesHeading, dispatch]) */
-
 
   useEffect(() => {
     if (moviesStatus === "idle") {
@@ -72,7 +66,7 @@ const MoviesList = () => {
   let content;
 
   if (moviesStatus === "loading") {
-    <div>selamlar</div>;
+     content= (<div>selamlar</div>);
   } else if (moviesStatus === "succeeced") {
     content = (
       <div className="movies__container">
@@ -84,7 +78,7 @@ const MoviesList = () => {
           }}
         />
         {filteredMovie.map((movie) => {
-          return <Card movie={movie} key={movie.id} moviesHeading={moviesHeading} />;
+          return <Card movie={movie} key={movie.id} />;
         })}
         <BiRightArrow
           className="movies__arrow movies__arrow--right"
@@ -102,7 +96,6 @@ const MoviesList = () => {
   return (
     <div className="movies">
       <Slider />
-      <div className="movies__heading">{moviesHeading}</div>
       <Navigation />
       {content}
     </div>

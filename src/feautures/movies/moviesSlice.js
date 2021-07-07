@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
+  console.log("url: ", arg)
   const response = await axios.get(arg);
   return response.data.results;
 });
