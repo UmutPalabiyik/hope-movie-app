@@ -33,7 +33,6 @@ const SingleMoviePage = ({ match }) => {
   const genre = match.params.genre;
 
   /* movies reducer handle */
-  const movies = useSelector((state) => state.movies.movies);
   const moviesStatus = useSelector((state) => state.movies.status);
   const moviesHeading = useSelector((state) => state.movies.moviesHeading);
   const moviesCurrentPage = useSelector((state) => state.movies.currentPage);
@@ -81,15 +80,14 @@ const SingleMoviePage = ({ match }) => {
   if (moviesStatus === "loading") {
     <div>Loading ...</div>;
   } else if (moviesStatus === "succeeced") {
-    let movie = movies.find((movie) => movie.id.toString() === movieId);
     content = (
       <div
         className="single-movie__container"
         style={{
           backgroundImage: `url(${
-            movie.backdrop_path
-              ? baseImgUrl + movie.backdrop_path
-              : baseImgUrl + movie.poster_path
+            movieDetails.backdrop_path
+              ? baseImgUrl + movieDetails.backdrop_path
+              : baseImgUrl + movieDetails.poster_path
           })`,
         }}
       >
@@ -100,14 +98,14 @@ const SingleMoviePage = ({ match }) => {
             size={65}
             color={"#e50914"}
           />
-          <h1 className="single-movie__title">{movie.title}</h1>
+          <h1 className="single-movie__title">{movieDetails.title}</h1>
           <div className="single-movie__rate">
             <Rating
-              rating={movie.vote_average}
+              rating={movieDetails.vote_average}
               className="single-movie__stars"
             />
           </div>
-          <p className="single-movie__overview">{movie.overview}</p>
+          <p className="single-movie__overview">{movieDetails.overview}</p>
 
           <div className="single-movie__informations single-movie__informations--genres">
             <label className="single-movie__informations-heading">Genres</label>
@@ -147,16 +145,10 @@ const SingleMoviePage = ({ match }) => {
                 return <div className="single-movie__info">{country.name}</div>;
               })}
             </div>
-
           </div>
-          
         </div>
-              
-           <SimilarMovies movieId={movieId}/>
-            
-      
+        <SimilarMovies movieId={movieId} />
       </div>
-
     );
   }
 
