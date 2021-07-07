@@ -1,12 +1,30 @@
 .similar {
+    padding-left: 4rem;
+    padding-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   &__container {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     perspective: 2000px;
 
     position: relative;
   }
+}
+
+/* media queries */
+
+@media (max-width: 760px) {
+
+    .similar{
+
+        padding-left:0 ;
+        &__container{
+            justify-content: center;
+        }
+    }
 }

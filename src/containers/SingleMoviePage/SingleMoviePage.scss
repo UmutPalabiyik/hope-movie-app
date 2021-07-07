@@ -12,12 +12,11 @@
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.55);
     display: flex;
     flex-direction: column;
-    padding-left: 4rem;
-
   }
 
   &__details {
-    padding-top: 10rem;
+    padding-left: 4rem;
+    padding-top: 5rem;
     padding-bottom: 1rem ;
     position: relative;
   }
@@ -97,7 +96,7 @@
 
   &__back {
     cursor: pointer;
-    margin-bottom: 7rem;
+    margin-bottom: 5rem;
   }
 
   @keyframes slideInDetails {
