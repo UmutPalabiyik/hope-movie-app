@@ -3,20 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   handleMoviesHeading,
   handleCurrentPage,
+  handleStatus,
 } from "../../feautures/movies/moviesSlice";
 import { NavLink, useHistory } from "react-router-dom";
+
 
 const Navigation = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const moviesCurrentPage = useSelector((state) => state.movies.currentPage);
-  const moviesHeading = useSelector(state => state.movies.moviesHeading)
+  const moviesHeading = useSelector(state => state.movies.moviesHeading);
+  const moviesStatus = useSelector(state => state.movies.status)
+  console.log(moviesStatus)
   
 
   const handleLink = (heading) => {
    
     dispatch(handleMoviesHeading(heading))
     dispatch(handleCurrentPage(1)); // reset the current page number each time the buttons are clicked
+    dispatch(handleStatus("idle"))
     history.push(`/page/${moviesCurrentPage}`)
   }
 
@@ -30,7 +35,7 @@ const Navigation = () => {
             to=""
             className="nav__link"
             onClick={() => {
-              handleLink("POPULAR","popular")
+              handleLink("POPULAR")
 
             }}
           >
@@ -42,7 +47,7 @@ const Navigation = () => {
             to=""
             className="nav__link"
             onClick={() => { 
-              handleLink("UP COMING","upcoming")
+              handleLink("UP COMING")
             }}
           >
             Upcoming
@@ -53,7 +58,7 @@ const Navigation = () => {
             to=""
             className="nav__link"
             onClick={() => {
-              handleLink("NOW PLAYING","nowplaying")
+              handleLink("NOW PLAYING")
             }}
           >
             Now Playing

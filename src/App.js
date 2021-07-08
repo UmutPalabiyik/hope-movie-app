@@ -9,7 +9,9 @@ import {
 } from "react-router-dom";
 import SingleMoviePage from "./containers/SingleMoviePage/SingleMoviePage";
 
+
 const App = () => {
+
   return (
     <div className="app">
       <Router>

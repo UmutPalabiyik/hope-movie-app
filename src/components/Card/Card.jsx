@@ -23,6 +23,7 @@ const Card = ({ movie }) => {
             className="card__poster"
             src={`${baseImgUrl}${poster_path}`}
             alt=""
+            loading="lazy"
           />
           <p className="card__vote">{`${
             Number.isInteger(vote_average) ? vote_average + ".0" : vote_average

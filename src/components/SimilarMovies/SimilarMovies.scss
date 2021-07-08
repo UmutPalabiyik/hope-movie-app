@@ -1,9 +1,16 @@
 .similar {
-    padding-left: 4rem;
-    padding-top: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding-left: 4rem;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  &__heading {
+    color: #e50914;
+    font-size: 2rem;
+    font-weight: 500;
+  }
   &__container {
     width: 100%;
     display: flex;
@@ -19,12 +26,11 @@
 /* media queries */
 
 @media (max-width: 760px) {
+  .similar {
+    padding-left: 0;
 
-    .similar{
-
-        padding-left:0 ;
-        &__container{
-            justify-content: center;
-        }
+    &__container {
+      justify-content: center;
     }
+  }
 }

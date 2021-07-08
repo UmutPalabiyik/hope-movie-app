@@ -11,6 +11,7 @@ import request from "../../requests";
 import "./SingleMoviePage.scss";
 import SimilarMovies from "../../components/SimilarMovies/SimilarMovies";
 
+
 const SingleMoviePage = ({ match }) => {
   const dispatch = useDispatch();
   const [movieDetails, setMovieDetails] = useState({});
@@ -34,8 +35,7 @@ const SingleMoviePage = ({ match }) => {
 
   /* movies reducer handle */
   const moviesStatus = useSelector((state) => state.movies.status);
-  const moviesHeading = useSelector((state) => state.movies.moviesHeading);
-  const moviesCurrentPage = useSelector((state) => state.movies.currentPage);
+
 
   /* base urls */
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
@@ -44,15 +44,8 @@ const SingleMoviePage = ({ match }) => {
 
   // go home page
   const goHOme = () => {
-    if (moviesHeading === "POPULAR") {
-      dispatch(fetchMovies(request.fetchPopular(moviesCurrentPage)));
-    } else if (moviesHeading === "NOW PLAYING") {
-      dispatch(fetchMovies(request.fetchNowPlaying(moviesCurrentPage)));
-    } else if (moviesHeading === "UP COMING") {
-      dispatch(fetchMovies(request.fetchUpComing(moviesCurrentPage)));
-    }
 
-    history.push(`/page/${moviesCurrentPage}`);
+    history.goBack()
   };
 
   // fetch movie cast
@@ -78,8 +71,7 @@ const SingleMoviePage = ({ match }) => {
 
   let content;
   if (moviesStatus === "loading") {
-    <div>Loading ...</div>;
-  } else if (moviesStatus === "succeeced") {
+  } else if (moviesStatus === "succeeded") {
     content = (
       <div
         className="single-movie__container"
@@ -162,7 +154,7 @@ const SingleMoviePage = ({ match }) => {
     }
   }, [dispatch, genre, page]);
 
-  console.log("single movie çalıştı");
+
   return <div className="single-movie">{content}</div>;
 };
 

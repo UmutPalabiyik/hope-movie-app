@@ -17,10 +17,10 @@ const SimilarMovies = ({ movieId }) => {
     fetchSimilarMovies();
   }, [movieId]);
 
-  console.log("similar movies çalıştı ", similarMovies);
-
+  
   return (
     <div className="similar">
+        {similarMovies.length > 0 ? <h2 className="similar__heading">Similar Movies</h2> : ""}  
       <div className="similar__container">
         {similarMovies.map((movie) => {
           return <Card movie={movie} />;

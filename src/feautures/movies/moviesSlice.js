@@ -29,6 +29,9 @@ const moviesSlice = createSlice({
     },
     handleCurrentPage: (state, action) => {
       state.currentPage = action.payload
+    },
+    handleStatus: (state, action) => {
+      state.status = action.payload
     }
 
     
@@ -38,7 +41,7 @@ const moviesSlice = createSlice({
       state.status = "loading";
     },
     [fetchMovies.fulfilled]: (state, action) => {
-      state.status = "succeeced";
+      state.status = "succeeded";
       state.movies = action.payload;
     },
     [fetchMovies.error]: (state, action) => {
@@ -48,5 +51,5 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { handleInputValue, handleMoviesHeading, handleCurrentPage } = moviesSlice.actions;
+export const { handleInputValue, handleMoviesHeading, handleCurrentPage, handleStatus } = moviesSlice.actions;
 export default moviesSlice.reducer;
