@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { FcStart } from "react-icons/fc";
 import axios from "axios";
 
 import { fetchMovies } from "../../feautures/movies/moviesSlice";
@@ -10,14 +11,16 @@ import request from "../../requests";
 
 import "./SingleMoviePage.scss";
 import SimilarMovies from "../../components/SimilarMovies/SimilarMovies";
-
+import TrailerModal from "../../components/UI/TrailerModal/TrailerModal";
 
 const SingleMoviePage = ({ match }) => {
+  // hooks
   const dispatch = useDispatch();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
-
+  const [activeTrailer, setActiveTrailer] = useState(false);
   const history = useHistory();
+
 
   // number month to string
   const date = new Date(movieDetails.release_date);
@@ -36,7 +39,6 @@ const SingleMoviePage = ({ match }) => {
   /* movies reducer handle */
   const moviesStatus = useSelector((state) => state.movies.status);
 
-
   /* base urls */
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const movieDetailUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=c057c067b76238e7a64d3ba8de37076e&language=en-US`;
@@ -44,8 +46,8 @@ const SingleMoviePage = ({ match }) => {
 
   // go home page
   const goHOme = () => {
-
-    history.goBack()
+    console.log("back çalıştı")
+    history.push("/")
   };
 
   // fetch movie cast
@@ -69,12 +71,24 @@ const SingleMoviePage = ({ match }) => {
     fetchMovieDetails();
   }, [movieDetailUrl]);
 
+  const handleMovieTrailer = (event) => {
+    event.stopPropagation()
+    setActiveTrailer(!activeTrailer);
+  };
+
+
   let content;
   if (moviesStatus === "loading") {
   } else if (moviesStatus === "succeeded") {
     content = (
       <div
-        className="single-movie__container"
+        className={`single-movie__container ${
+          activeTrailer ? "single-movie__container--opacity" : ""
+        }`}
+        onClick={() => {
+
+          setActiveTrailer(false);
+        }}
         style={{
           backgroundImage: `url(${
             movieDetails.backdrop_path
@@ -83,6 +97,11 @@ const SingleMoviePage = ({ match }) => {
           })`,
         }}
       >
+        <div className="single-movie__play" onClick={handleMovieTrailer}>
+          <FcStart className="single-movie__play-icon" />
+          <p className="single-movie__play-label">WATCH TRAILER</p>
+        </div>
+
         <div className="single-movie__details">
           <IoMdArrowRoundBack
             className="single-movie__back"
@@ -139,7 +158,8 @@ const SingleMoviePage = ({ match }) => {
             </div>
           </div>
         </div>
-        <SimilarMovies movieId={movieId} />
+        <SimilarMovies activeTrailer={activeTrailer}   movieId={movieId} />
+        <TrailerModal activeTrailer={activeTrailer} movieId={movieId} />
       </div>
     );
   }
@@ -153,7 +173,6 @@ const SingleMoviePage = ({ match }) => {
       dispatch(fetchMovies(request.fetchUpComing(page)));
     }
   }, [dispatch, genre, page]);
-
 
   return <div className="single-movie">{content}</div>;
 };

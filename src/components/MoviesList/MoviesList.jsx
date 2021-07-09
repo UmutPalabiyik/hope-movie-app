@@ -57,11 +57,12 @@ const MoviesList = () => {
     }
   }, [moviesCurrentPage, dispatch, moviesHeading, moviesStatus]);
 
+ 
 
   let content;
 
   if (moviesStatus === "loading") {
-    content = <DotLoader size={30} color={"#F37a24"} />;
+    <DotLoader size={30} color={"#F37a24"} />
   } else if (moviesStatus === "succeeded") {
     content = (
       <div className="movies__container">
@@ -99,6 +100,9 @@ const MoviesList = () => {
       <Slider />
       <Navigation />
       {content}
+      
+        
+      
     </div>
   );
 };

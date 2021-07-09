@@ -3,6 +3,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { handleInputValue } from "../../feautures/movies/moviesSlice";
 import { useDispatch } from "react-redux";
 
+
 const Header = () => {
   const dispatch = useDispatch();
   const handleInput = (e) => {
@@ -11,6 +12,7 @@ const Header = () => {
 
   return (
     <div className="header">
+      
       <div className="header__container">
         <div className="header__input-container">
           <input className="header__input" type="text" onChange={handleInput} />

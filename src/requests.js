@@ -22,15 +22,17 @@ const requests = {
     return `/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
   },
 
-  fetchMovieDetails:(movieId) =>  {
-    
-      return `https://api.themoviedb.org/3/movie/${API_KEY}/credits?api_key=${movieId}&language=en-US`
-    },
+  fetchMovieDetails: (movieId) => {
+    return `https://api.themoviedb.org/3/movie/${API_KEY}/credits?api_key=${movieId}&language=en-US`;
+  },
 
-  fetchSimiliarMovies:(movieId) => {
-    return `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`
-  }
+  fetchSimiliarMovies: (movieId) => {
+    return `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`;
+  },
+
+  fetchMovieTrailer: (movieId) => {
+    return `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+  },
 };
-
 
 export default requests;

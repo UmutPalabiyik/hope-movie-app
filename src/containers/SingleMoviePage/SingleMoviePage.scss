@@ -12,12 +12,68 @@
     box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.55);
     display: flex;
     flex-direction: column;
+
+    &--opacity{
+      box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.85);
+
+      .single-movie__details{
+        opacity: .1;
+      }
+    }
+  }
+
+  &__play {
+    position: absolute;
+    top: 25%;
+    right: 25%;
+    cursor: pointer;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+
+    animation: rightToLeft 1.3s;
+
+
+    &-icon {
+      color: #ffff;
+      font-size: 12rem;
+      transition: all 0.4s;
+
+      & > path,
+      & > polygon {
+        transition: all 0.4s ease;
+      }
+
+      &:hover > path {
+        fill: #ffff;
+      }
+
+      &:hover > polygon {
+        fill: #f44336;
+      }
+
+      &:hover + p {
+        color: #f44336;
+      }
+    }
+
+    &-label {
+      color: #ffff;
+      font-size: 2rem;
+      margin-left: 0.5rem;
+      transition: all 0.3s;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+
+
+    }
   }
 
   &__details {
     padding-left: 4rem;
     padding-top: 5rem;
-    padding-bottom: 1rem ;
+    padding-bottom: 1rem;
     position: relative;
   }
 
@@ -30,7 +86,6 @@
     align-items: center;
     margin-top: 1rem;
   }
-
 
   &__overview {
     color: rgb(196, 195, 195);
@@ -96,7 +151,7 @@
 
   &__back {
     cursor: pointer;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
   }
 
   @keyframes slideInDetails {
@@ -110,6 +165,16 @@
       transform: translateX(0);
     }
   }
+
+  @keyframes rightToLeft{
+    0%{
+      transform: translateX(500px);
+    }
+    100%{
+      transform: translateX(0);
+    }
+  }
+
 }
 
 /* media queries */
@@ -129,7 +194,7 @@
     }
 
     &__back {
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
   }
 }
@@ -144,7 +209,6 @@
     &__title {
       font-size: 3.5rem;
     }
-
 
     &__back {
       margin-bottom: 2rem;
@@ -170,21 +234,20 @@
       flex-direction: column;
       align-items: flex-start;
 
-      &-container{
+      &-container {
         margin: 0;
       }
     }
 
-    &__info{
+    &__info {
       margin: 0;
     }
   }
 }
 
-
 @media screen and (max-width: 475px) {
   .single-movie {
-    &__details{
+    &__details {
       padding-left: 2rem;
     }
   }

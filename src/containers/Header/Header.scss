@@ -1,5 +1,6 @@
 .header {
   height: 11vh;
+  width: 100%;
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.7) 15%,
@@ -8,6 +9,8 @@
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
+  position: relative;
+
 
   &__input-container {
     width: 25vw;
@@ -15,6 +18,8 @@
     height: 50px;
     position: relative;
   }
+
+
 
   &__input {
     font-size: 2rem;

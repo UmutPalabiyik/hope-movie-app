@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export const fetchMovies = createAsyncThunk("movies/fetch", async (arg) => {
-  console.log("url: ", arg)
+  console.log("url: ", arg);
   const response = await axios.get(arg);
   return response.data.results;
 });
@@ -28,13 +28,15 @@ const moviesSlice = createSlice({
       state.moviesHeading = action.payload;
     },
     handleCurrentPage: (state, action) => {
-      state.currentPage = action.payload
+      state.currentPage = action.payload;
     },
     handleStatus: (state, action) => {
-      state.status = action.payload
-    }
+      state.status = action.payload;
+    },
 
-    
+    resetInputValue: (state, action) => {
+      state.inputValue = action.payload;
+    },
   },
   extraReducers: {
     [fetchMovies.pending]: (state, action) => {
@@ -51,5 +53,11 @@ const moviesSlice = createSlice({
   },
 });
 
-export const { handleInputValue, handleMoviesHeading, handleCurrentPage, handleStatus } = moviesSlice.actions;
+export const {
+  handleInputValue,
+  handleMoviesHeading,
+  handleCurrentPage,
+  handleStatus,
+  resetInputValue,
+} = moviesSlice.actions;
 export default moviesSlice.reducer;

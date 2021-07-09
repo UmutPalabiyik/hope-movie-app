@@ -1,7 +1,8 @@
 import "./Card.scss";
 import {NavLink } from "react-router-dom";
 import {IoMdArrowRoundForward } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { resetInputValue } from "../../feautures/movies/moviesSlice";
 
 
 
@@ -9,14 +10,18 @@ const Card = ({ movie }) => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
   const { title, overview, vote_average, poster_path, id } = movie;
+  const dispatch = useDispatch()
 
-  const moviesCurrentPage = useSelector(state => state.movies.currentPage)
-  const moviesHeading = useSelector(state => state.movies.moviesHeading)
+  const moviesCurrentPage = useSelector(state => state.movies.currentPage);
+  const moviesHeading = useSelector(state => state.movies.moviesHeading);
 
-  
+
+  const handleInputValue = () => {
+    dispatch(resetInputValue(""))
+  }
 
   return (
-    <NavLink to={`/movie/${moviesCurrentPage}/${moviesHeading}/${id}`}>
+    <NavLink to={`/movie/${moviesCurrentPage}/${moviesHeading}/${id}`} onClick={handleInputValue}> 
       <div className="card">
         <div className="card__front">
           <img

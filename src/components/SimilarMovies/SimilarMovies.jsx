@@ -4,7 +4,7 @@ import axios from "axios";
 import Card from "../Card/Card";
 import "./SimilarMovies.scss"
 
-const SimilarMovies = ({ movieId }) => {
+const SimilarMovies = ({ movieId, activeTrailer }) => {
   const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const SimilarMovies = ({ movieId }) => {
 
   
   return (
-    <div className="similar">
+    <div className={`similar ${activeTrailer ? "similar--opacity" : ""}`}>
         {similarMovies.length > 0 ? <h2 className="similar__heading">Similar Movies</h2> : ""}  
       <div className="similar__container">
         {similarMovies.map((movie) => {
