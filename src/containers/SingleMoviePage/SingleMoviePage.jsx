@@ -46,7 +46,6 @@ const SingleMoviePage = ({ match }) => {
 
   // go home page
   const goHOme = () => {
-    console.log("back çalıştı")
     history.push("/")
   };
 
@@ -82,11 +81,11 @@ const SingleMoviePage = ({ match }) => {
   } else if (moviesStatus === "succeeded") {
     content = (
       <div
+
         className={`single-movie__container ${
           activeTrailer ? "single-movie__container--opacity" : ""
         }`}
         onClick={() => {
-
           setActiveTrailer(false);
         }}
         style={{
@@ -174,7 +173,7 @@ const SingleMoviePage = ({ match }) => {
     }
   }, [dispatch, genre, page]);
 
-  return <div className="single-movie">{content}</div>;
+  return <div className="single-movie" key={movieId}>{content}</div>;
 };
 
 export default SingleMoviePage;

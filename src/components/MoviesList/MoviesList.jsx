@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-import DotLoader from "react-spinners/DotLoader";
 
 import {
   fetchMovies,
   handleCurrentPage,
-  handleStatus
+  handleStatus,
 } from "../../feautures/movies/moviesSlice";
 import Card from "../Card/Card";
 import Slider from "../UI/Slider/Slider";
@@ -15,6 +14,7 @@ import Navigation from "../Navigations/Navigation";
 
 import "./MoviesList.scss";
 import requests from "../../requests";
+import LoadingIndicator from "../UI/LoadingIndicator/LoadingIndicator";
 
 const MoviesList = () => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const MoviesList = () => {
 
   // Handle page number
   const handlePageNumber = (nexPage) => {
-    dispatch(handleStatus("idle"))
+    dispatch(handleStatus("idle"));
     dispatch(
       handleCurrentPage(Math.max(1, Math.min(moviesCurrentPage + nexPage, 10)))
     );
@@ -57,12 +57,10 @@ const MoviesList = () => {
     }
   }, [moviesCurrentPage, dispatch, moviesHeading, moviesStatus]);
 
- 
-
   let content;
 
   if (moviesStatus === "loading") {
-    <DotLoader size={30} color={"#F37a24"} />
+    console.log("hi its loading")
   } else if (moviesStatus === "succeeded") {
     content = (
       <div className="movies__container">
@@ -99,10 +97,7 @@ const MoviesList = () => {
     <div className="movies">
       <Slider />
       <Navigation />
-      {content}
-      
-        
-      
+      {moviesStatus === "loading" ? <LoadingIndicator/> : content} 
     </div>
   );
 };

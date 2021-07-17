@@ -13,3 +13,47 @@
 
 
 }
+
+
+/* media queries */
+
+@media screen and (max-width: 1250px) {
+
+    .trailer{
+        &__video{
+            width: 720px;
+            height: 480px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    .trailer{
+        &__video{
+            width: 480px;
+            height: 360px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+    .trailer{
+        &__video{
+            width: 400px;
+            height: 300px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .trailer{
+        &__video{
+            width: 340px;
+            height: 220px;
+        }
+    }
+
+}

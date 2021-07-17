@@ -6,6 +6,7 @@ import { resetInputValue } from "../../feautures/movies/moviesSlice";
 
 
 
+
 const Card = ({ movie }) => {
 
   const baseImgUrl = "https://image.tmdb.org/t/p/original";
@@ -25,10 +26,11 @@ const Card = ({ movie }) => {
       <div className="card">
         <div className="card__front">
           <img
+          loading="lazy"
             className="card__poster"
             src={`${baseImgUrl}${poster_path}`}
-            alt=""
-            loading="lazy"
+            alt={title}
+
           />
           <p className="card__vote">{`${
             Number.isInteger(vote_average) ? vote_average + ".0" : vote_average
